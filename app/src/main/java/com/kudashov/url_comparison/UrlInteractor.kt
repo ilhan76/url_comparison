@@ -1,22 +1,16 @@
 package com.kudashov.url_comparison
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Scheduler
-import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
 import okhttp3.*
 import java.io.IOException
-import java.util.function.Function
 import kotlin.math.min
 
-class UrlInteractor( val context: Context) {
+class UrlInteractor {
 
     private val client = OkHttpClient.Builder()
-        //.addHttpLoggingInterceptor()
         .build()
 
     fun getTheDifference(
@@ -80,10 +74,10 @@ class UrlInteractor( val context: Context) {
         return result
     }
 
-    private fun formatPair(listPair: List<Pair<String, String>>) : Observable<String> {
+    private fun formatPair(listPair: List<Pair<String, String>>): Observable<String> {
         var res = ""
 
-        for (i in listPair){
+        for (i in listPair) {
             res += "{${i.first}} -> {${i.second}} \n"
         }
         return Observable.just(res)
